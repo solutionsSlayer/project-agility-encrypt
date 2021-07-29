@@ -2,33 +2,33 @@ import logo from '../../assets/images/logo.png';
 import './home.scss';
 import * as CryptoJS from "crypto-js"
 import {useState} from "react";
+import {hexToString} from "../../utils/hexToString";
+import utf8 from "utf8/utf8";
+import Select from "../../components/select";
+import Input from "../../components/input";
 
 function Home() {
   const [key, setKey] = useState("");
   const [result, setResult] = useState("");
   const [text, setText] = useState("");
-
+  const [algo, setAlgo] = useState("AES");
+  const algorithms = [
+      {value: "AES", label: "Advanced Encryption Standard"},
+      {value: "DES", label: "Data Encryption Standard"},
+      {value: "TripleDES", label: "Triple Data Encryption Standard"},
+      {value: "Rabbit", label: "Rabbit"},
+      {value: "RC4", label: "Rivest Cipher 4"},
+      {value: "RC4Drop", label: "Rivest Cipher 4 Drop"},
+  ]
 
   let encrypt = () => {
-    setResult(CryptoJS.AES.encrypt(text, key).toString());
+    setResult(CryptoJS[algo].encrypt(text, key).toString());
   }
 
   let decrypt = () => {
     setResult(
-        hex_to_ascii(
-            CryptoJS.AES.decrypt(text, key).toString()
-        )
+        utf8.decode(hexToString(CryptoJS[algo].decrypt(text, key).toString()))
     );
-  }
-
-  function hex_to_ascii(str1)
-  {
-    let hex = str1.toString();
-    let str = '';
-    for (let n = 0; n < hex.length; n += 2) {
-        str += String.fromCharCode(parseInt(hex.substr(n, 2), 16));
-    }
-    return str;
   }
 
   return (
@@ -40,17 +40,10 @@ function Home() {
           <div className="container">
               <div className="grid grid-cols-2 gap-8">
                   <div className="card p-8 flex flex-col items-center">
-                      <h1 className="title">
-                          Commencez à chiffrer
-                      </h1>
-                      <div className="md-input">
-                          <input id="key" className={key?"active":""} type="text" defaultValue={key} onChange={(v) => setKey(v.currentTarget.value)}/>
-                          <label htmlFor="key">Clé de chiffrement</label>
-                      </div>
-                      <div className="md-input mt-4">
-                          <textarea id="text" className={text?"active":""} rows={20} value={text} onChange={(v) => {setText(v.currentTarget.value)}}/>
-                          <label htmlFor="text">Texte à Chiffrer / Déchiffrer</label>
-                      </div>
+                      <h1>Commencez à chiffrer</h1>
+                      <Input name={"key"} label={"Clé de chiffrement"} value={key} onChange={v => setKey(v)}/>
+                      <Select name={"algo"} className={"mt-7"} label={"Algorithme"} options={algorithms} value={algo} onChange={v => setAlgo(v)} />
+                      <Input name={"text"} type={"multiline"} className={"mt-7"} label={"Texte à Chiffrer / Déchiffrer"} lines={20} value={text} onChange={v => setText(v)}/>
                       <div className="flex justify-center mt-7 w-full">
                           <button onClick={async () => setText( await navigator.clipboard.readText())} className="md-button w-1/2">Coller</button>
                       </div>
@@ -64,13 +57,8 @@ function Home() {
                       </div>
                   </div>
                   <div className="card p-8 flex flex-col items-center">
-                      <h1 className="title">
-                          Résultat
-                      </h1>
-                      <div className="md-input mt-4">
-                          <textarea id="text" className={result?"active":""} rows={22} value={result} readOnly={true} />
-                          <label htmlFor="text">Résultat</label>
-                      </div>
+                      <h1>Résultat</h1>
+                      <Input name={"result"} type={"multiline"} label={"Texte à Chiffrer / Déchiffrer"} lines={26} value={result} readOnly={true}/>
                       <div className="flex justify-center mt-7 w-full">
                           <button onClick={() => navigator.clipboard.writeText(result)} className="md-button w-1/2">Copier</button>
                       </div>
