@@ -1,0 +1,89 @@
+swagger: "2.0"
+info:
+  description: This application provide APIs which will be used by the reactjs app. With theses we will be able to encrypt and decrypt messages with a key
+  version: "1.0.5"
+  title: Encrypt/Decrypt
+  termsOfService: /terms
+  contact:
+    email: contact@logo.fr
+  license:
+    name: Apache 2.0
+    url: http://www.apache.org/licenses/LICENSE-2.0.html
+basePath: /
+tags:
+  - name: Encrypt
+    description: Encryption
+schemes:
+  - http
+paths:
+  /crypt/encrypt:
+    post:
+      tags:
+        - Encrypt
+      summary: Encrypt a message with key
+      description:
+      operationId: Encrypt
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - name: text
+          in: formData
+          description: Message to be encrypt
+          required: true,
+          type: string
+          format: utf-8
+        - name: key
+          in: formData
+          description: Encryption key
+          required: true,
+          type: string
+          format: utf-8
+      responses:
+        200:
+          description: U2FsdGVkX1/uaPfR8KF9Nf5nA/KBgICytoaw42j1DvM=
+          schema:
+            $ref: #/definitions/EncryptedReturn
+  /crypt/decrypt:
+    post:
+      tags:
+        - Decrypt
+      summary: Decrypt a message with key
+      description:
+      operationId: Decrypt
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - name: text
+          in: formData
+          description: Message to be decrypt
+          required: true,
+          type: string
+          format: utf-8
+        - name: key
+          in: formData
+          description: Decryption key
+          required: true,
+          type: string
+          format: utf-8
+      responses:
+        200:
+          description: oui
+          schema:
+            $ref: #/definitions/DecryptedReturn
+definitions:
+  EncryptedReturn:
+    type: object
+    properties:
+      encrypted:
+        type: string
+        example: U2FsdGVkX1/K86MC+O7e2EBgsFzXft2Vv9vFbBqVLgs=
+  DecryptedReturn:
+    type: object
+    properties:
+      decrypted:
+        type: string
+        example: test
