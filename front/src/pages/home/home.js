@@ -4,8 +4,8 @@ import * as CryptoJS from "crypto-js"
 import {useState} from "react";
 import {hexToString} from "../../utils/hexToString";
 import utf8 from "utf8/utf8";
-import Select from "../../components/select";
-import Input from "../../components/input";
+import Select from "../../components/select/select";
+import Input from "../../components/input/input";
 
 function Home() {
   const [key, setKey] = useState("");
@@ -26,9 +26,13 @@ function Home() {
   }
 
   let decrypt = () => {
-    setResult(
-        utf8.decode(hexToString(CryptoJS[algo].decrypt(text, key).toString()))
-    );
+      let resultUtf8;
+      try{
+          resultUtf8 = utf8.decode(hexToString(CryptoJS[algo].decrypt(text, key).toString()));
+      }catch(e){
+          resultUtf8 = "une erreur s'est produite";
+      }
+    setResult(resultUtf8?resultUtf8:"une erreur s'est produite");
   }
 
   return (
@@ -58,7 +62,7 @@ function Home() {
                   </div>
                   <div className="card p-8 flex flex-col items-center">
                       <h1>Résultat</h1>
-                      <Input name={"result"} type={"multiline"} label={"Texte à Chiffrer / Déchiffrer"} lines={26} value={result} readOnly={true}/>
+                      <Input name={"result"} type={"multiline"} error={result === "une erreur s'est produite"} label={"Texte à Chiffrer / Déchiffrer"} lines={26} value={result} readOnly={true}/>
                       <div className="flex justify-center mt-7 w-full">
                           <button onClick={() => navigator.clipboard.writeText(result)} className="md-button w-1/2">Copier</button>
                       </div>
