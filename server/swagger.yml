@@ -1,7 +1,7 @@
 swagger: "2.0"
 info:
-  description: This application provide APIs which will be used by the reactjs app. With theses we will be able to encrypt and decrypt messages with a key
-  version: "1.0.5"
+  description: This application provide APIs which can be used with your custom app. With theses we will be able to encrypt and decrypt messages with a key, on selected algorithm
+  version: "Bêta 1"
   title: Logo - API
 basePath: /api
 tags:

@@ -13,6 +13,7 @@ app.use(express.urlencoded({extended: false}))
 
 // Protect from CORS error
 app.use((require('cors'))());
+app.use('/assets', express.static('assets'));
 
 app.use('/api', cryptRouter);
 app.use('/doc', docRouter);
