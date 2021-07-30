@@ -1,5 +1,9 @@
+img.logo{
+  content: var(--image);
+}
+
 .card{
-  background: #FAFAFA;
+  background: var(--base-snd);
   box-shadow: 0 0 12px rgba(0, 0, 0, 0.07);
   border-radius: 13px;
   h1{
@@ -11,7 +15,7 @@
     text-transform: uppercase;
     display: flex;
     align-items: center;
-    color: #5BB1B0;
+    color: var(--accent);
     margin-bottom: 24px;
   }
 }
@@ -19,18 +23,18 @@ button.md-button{
   outline: none;
   padding: 0 24px;
   height: 36px;
-  border: 1px solid #5BB1B0;
-  color: #5BB1B0;
+  border: 1px solid var(--accent);
+  color: var(--accent);
   box-sizing: border-box;
   text-transform: uppercase;
   transition: .3s;
   border-radius: 99px;
   &:hover{
-    background-color: #5BB1B0;
+    background-color: var(--accent);
     color: white;
   }
   &:active{
-    background-color: #67CAC9;
+    background-color: var(--accent-light);
     color: white;
   }
 }

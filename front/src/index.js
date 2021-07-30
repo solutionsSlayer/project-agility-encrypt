@@ -4,10 +4,25 @@ import './index.css';
 import './assets/css/tailwind.css'
 import Home from './pages/home/home';
 import reportWebVitals from './reportWebVitals';
+import {
+    BrowserRouter as Router,
+    Route,
+    Redirect
+} from "react-router-dom";
 
 ReactDOM.render(
   <React.StrictMode>
-    <Home />
+      <Router>
+          <Route path="/logo">
+              <Home mainTheme="logo" />
+          </Route>
+          <Route path="/google">
+              <Home mainTheme="google" />
+          </Route>
+          <Route exact path="/">
+              <Redirect to="/logo"/>
+          </Route>
+      </Router>
   </React.StrictMode>,
   document.getElementById('root')
 );

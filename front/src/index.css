@@ -1,3 +1,35 @@
+body{
+  --image: url(assets/images/logos/logo.png);
+  --base: white;
+  --base-snd: #FAFAFA;
+  --border: #666666;
+  --text: #111;
+  --accent: #5BB1B0;
+  --accent-light: #67CAC9;
+  --danger: #B70E0C;
+}
+body.dark{
+  --image: url(assets/images/logos/logo.png);
+  --base: #111;
+  --base-snd: #171717;
+  --border: #666666;
+  --text: #eee;
+  --accent: #5BB1B0;
+  --accent-light: #67CAC9;
+  --danger: #B70E0C;
+}
+body.google{
+  --image: url(https://upload.wikimedia.org/wikipedia/commons/thumb/5/53/Google_%22G%22_Logo.svg/1200px-Google_%22G%22_Logo.svg.png);
+
+  --accent: #4c8bf5;
+  --accent-light: #73a4f5;
+  --danger: #EE0000;
+}
+
+
+
+
+
 body {
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
@@ -5,6 +37,7 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  background: var(--base);
 }
 
 code {

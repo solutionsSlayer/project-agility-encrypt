@@ -3,8 +3,8 @@ div.md-input{
   width: 100%;
   input, textarea{
     outline: none;
-    background: #FAFAFA;
-    border: 1px solid #666666;
+    background: var(--base-snd);
+    border: 1px solid var(--border);
     box-sizing: border-box;
     border-radius: 8px;
     flex: none;
@@ -15,6 +15,7 @@ div.md-input{
     transition: .3s;
     padding: 5px 10px;
     width: 100%;
+    color: var(--text);
     &~label{
       font-family: Lato, sans-serif;
       font-style: normal;
@@ -28,7 +29,8 @@ div.md-input{
       left: 8px;
       padding: 0 2px;
       transition: .3s;
-      background: #FAFAFA;
+      background: var(--base-snd);
+      color: var(--text);
     }
     &:focus, &.active{
       &~label{
@@ -37,17 +39,17 @@ div.md-input{
       }
     }
     &.error{
-      border-color: #B70E0C;
-      box-shadow: inset 0 0 0 1px #B70E0C;
+      border-color: var(--danger);
+      box-shadow: inset 0 0 0 1px var(--danger);
       &~label{
-        color: #B70E0C;
+        color: var(--danger);
       }
     }
     &:focus{
-      border-color: #5BB1B0;
-      box-shadow: inset 0 0 0 1px #5BB1B0;
+      border-color: var(--accent);
+      box-shadow: inset 0 0 0 1px var(--accent);
       &~label{
-        color: #5BB1B0;
+        color: var(--accent);
       }
     }
   }

@@ -1,4 +1,3 @@
-import logo from '../../assets/images/logo.png';
 import './home.scss';
 import * as CryptoJS from "crypto-js"
 import {useState} from "react";
@@ -7,7 +6,8 @@ import utf8 from "utf8/utf8";
 import Select from "../../components/select/select";
 import Input from "../../components/input/input";
 
-function Home() {
+function Home({mainTheme = "logo"}) {
+  document.body.classList.add(mainTheme);
   const [key, setKey] = useState("");
   const [result, setResult] = useState("");
   const [text, setText] = useState("");
@@ -38,7 +38,7 @@ function Home() {
   return (
     <section id="main" className="w-full">
       <div className="flex justify-center mt-16 mb-8 w-full">
-        <img src={logo} alt="logo" className="w-64"/>
+        <img alt="logo" className="w-64 logo"/>
       </div>
       <div className="flex justify-center px-2">
           <div className="container">

@@ -5,8 +5,8 @@ div.md-select{
   select{
     cursor: pointer;
     outline: none;
-    background: #FAFAFA;
-    border: 1px solid #666666;
+    background: var(--base-snd);
+    border: 1px solid var(--border);
     box-sizing: border-box;
     border-radius: 8px;
     flex: none;
@@ -17,6 +17,7 @@ div.md-select{
     transition: .3s;
     padding: 5px 10px;
     width: 100%;
+    color: var(--text);
     &~label{
       font-family: Lato, sans-serif;
       font-style: normal;
@@ -30,14 +31,15 @@ div.md-select{
       left: 8px;
       padding: 0 2px;
       transition: .3s;
-      background: #FAFAFA;
+      background: var(--base-snd);
       transform: scale(.8) translate(-10%, -25%);
+      color: var(--text);
     }
     &:focus{
-      border-color: #5BB1B0;
-      box-shadow: inset 0 0 0 1px #5BB1B0;
+      border-color: var(--accent);
+      box-shadow: inset 0 0 0 1px var(--accent);
       &~label{
-        color: #5BB1B0;
+        color: var(--accent);
       }
     }
   }
