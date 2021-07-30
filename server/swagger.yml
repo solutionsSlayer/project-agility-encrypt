@@ -24,27 +24,39 @@ paths:
       description:
       operationId: Encrypt
       consumes:
-        - application/json
+        - application/x-www-form-urlencoded
       produces:
         - application/json
       parameters:
         - name: text
           in: formData
           description: Message to be encrypt
-          required: true,
+          required: true
           type: string
           format: utf-8
         - name: key
           in: formData
           description: Encryption key
-          required: true,
+          required: true
           type: string
           format: utf-8
+        - name: algorithm
+          in: formData
+          description: "Encryption algorithm (Allowed: AES, DES, TripleDES, Rabbit, RC4, RC4Drop)"
+          required: true
+          schema:
+            type: string
+            enum: ["AES", "DES", "TripleDES", "Rabbit", "RC4", "RC4Drop"]
+            example: AES
       responses:
         200:
-          description: U2FsdGVkX1/uaPfR8KF9Nf5nA/KBgICytoaw42j1DvM=
+          description: return the text encrypted with key
           schema:
-            $ref: #/definitions/EncryptedReturn
+            $ref: "#/definitions/EncryptedReturn"
+        422:
+          description: when data entered is incomplete or wrong
+          schema:
+            $ref: "#/definitions/UnprocessableEntity"
   /crypt/decrypt:
     post:
       tags:
@@ -53,27 +65,39 @@ paths:
       description:
       operationId: Decrypt
       consumes:
-        - application/json
+        - application/x-www-form-urlencoded
       produces:
         - application/json
       parameters:
         - name: text
           in: formData
           description: Message to be decrypt
-          required: true,
+          required: true
           type: string
           format: utf-8
         - name: key
           in: formData
-          description: Decryption key
-          required: true,
+          description: Eecryption key
+          required: true
           type: string
           format: utf-8
+        - name: algorithm
+          in: formData
+          description: "Encryption algorithm (Allowed: AES, DES, TripleDES, Rabbit, RC4, RC4Drop)"
+          required: true
+          schema:
+            type: string
+            enum: ["AES", "DES", "TripleDES", "Rabbit", "RC4", "RC4Drop"]
+            example: AES
       responses:
         200:
-          description: oui
+          description: return the text decrypted with key
           schema:
-            $ref: #/definitions/DecryptedReturn
+            $ref: "#/definitions/DecryptedReturn"
+        422:
+          description: when data entered is incomplete or wrong
+          schema:
+            $ref: "#/definitions/UnprocessableEntity"
 definitions:
   EncryptedReturn:
     type: object
@@ -87,3 +111,9 @@ definitions:
       decrypted:
         type: string
         example: test
+  UnprocessableEntity:
+    type: object
+    properties:
+      error:
+        type: string
+        example: Cannot process with this data
