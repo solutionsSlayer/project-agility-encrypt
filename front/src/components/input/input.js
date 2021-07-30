@@ -1,3 +1,4 @@
+import "./input.scss"
 export default function Input({
     label = "",
     type = "text",
@@ -6,14 +7,15 @@ export default function Input({
     value,
     onChange = () => {},
     readOnly = false,
-    lines = 1
+    lines = 1,
+    error = false
 }){
     let rndKey = Math.round(Math.random()*10000);
     let TagType = `${type==="multiline"?"textarea":"input"}`
     return(
         <div className={`md-input ${className}`}>
             <TagType name={name}
-                className={value?"active":""}
+                className={`${value?"active":""} ${error?"error":""}`}
                 id={`input_${name?name:rndKey}`}
                 value={value}
                 onChange={e=>onChange?onChange(e.currentTarget.value):null}
