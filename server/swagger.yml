@@ -2,24 +2,19 @@ swagger: "2.0"
 info:
   description: This application provide APIs which will be used by the reactjs app. With theses we will be able to encrypt and decrypt messages with a key
   version: "1.0.5"
-  title: Encrypt/Decrypt
-  termsOfService: /terms
-  contact:
-    email: contact@logo.fr
-  license:
-    name: Apache 2.0
-    url: http://www.apache.org/licenses/LICENSE-2.0.html
-basePath: /
+  title: Logo - API
+basePath: /api
 tags:
-  - name: Encrypt
-    description: Encryption
+  - name: Cryptography
+    description: Encryption / Decryption API
 schemes:
   - http
+  - https
 paths:
-  /crypt/encrypt:
+  /encrypt:
     post:
       tags:
-        - Encrypt
+        - Cryptography
       summary: Encrypt a message with key
       description:
       operationId: Encrypt
@@ -57,10 +52,10 @@ paths:
           description: when data entered is incomplete or wrong
           schema:
             $ref: "#/definitions/UnprocessableEntity"
-  /crypt/decrypt:
+  /decrypt:
     post:
       tags:
-        - Decrypt
+        - Cryptography
       summary: Decrypt a message with key
       description:
       operationId: Decrypt
